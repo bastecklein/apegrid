@@ -228,7 +228,7 @@ export class ApeGrid {
         resizeGrid(this);
     }
 
-    #checkIfAttached() {
+    checkIfAttached() {
         if(this.holder && this.canvas) {
             const attached = document.body.contains(this.holder);
 
