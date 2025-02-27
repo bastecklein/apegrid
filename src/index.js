@@ -21,6 +21,14 @@ export const CELL_FORMATS = {
     DATE_TIME: 7
 };
 
+export const CELL_ALIGNMENTS = {
+    DEFAULT: 1,
+    LEFT: 2,
+    CENTER: 3,
+    RIGHT: 4,
+    JUSTIFY: 5
+};
+
 export class ApeGrid {
     constructor(holder, options = {}) {
 
@@ -1014,15 +1022,29 @@ function renderGridCell(grid, col, row, cX, rY, cW, rH, defColor, cIdx) {
 
     if(cellValue) {
 
-        let defAlign = "left";
+        let defAlign = CELL_ALIGNMENTS.LEFT;
 
         if(cellValue.f) {
             if(cellValue.f == CELL_FORMATS.NUMBER || cellValue.f == CELL_FORMATS.CURRENCY || cellValue.f == CELL_FORMATS.PERCENT) {
-                defAlign = "right";
+                defAlign = CELL_ALIGNMENTS.RIGHT;
             }
         }
 
-        let cellAlign = cellValue.a || defAlign;
+        let alignCode = cellValue.a || defAlign;
+
+        let cellAlign = "left";
+
+        if(alignCode == CELL_ALIGNMENTS.CENTER) {
+            cellAlign = "center";
+        }
+
+        if(alignCode == CELL_ALIGNMENTS.RIGHT) {
+            cellAlign = "right";
+        }
+
+        if(alignCode == CELL_ALIGNMENTS.JUSTIFY) {
+            cellAlign = "justify";
+        }
 
         let cellWidth = cW;
         let cellHeight = rH;
