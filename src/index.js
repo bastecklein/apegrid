@@ -205,7 +205,9 @@ export class ApeGrid {
             clearTimeout(instance.resizePing);
         }
 
-        instance.resizePing = setTimeout(instance.resize, 40);
+        instance.resizePing = setTimeout(function() {
+            instance.resize();
+        }, 40);
     }
 
     clearResizePing() {
