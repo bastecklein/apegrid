@@ -101,8 +101,13 @@ export class ApeGrid {
 
         setupInstanceListeners(instance);
 
-        new ResizeObserver(instance.#pingForResize).observe(instance.holder);
-        new MutationObserver(instance.#checkIfAttached).observe(instance.holder, { attributes: true, childList: true, subtree: true });
+        new ResizeObserver(function() {
+            instance.#pingForResize();
+        }).observe(instance.holder);
+
+        new MutationObserver(function() {
+            instance.#checkIfAttached();
+        }).observe(instance.holder, { attributes: true, childList: true, subtree: true });
 
         globalInstances[instance.id] = instance;
     }
