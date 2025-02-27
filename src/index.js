@@ -901,7 +901,7 @@ function getCoordsForCell(grid, col, row) {
     return result;
 }
 
-function getColumnNameForIndex(idx) {
+export function getColumnNameForIndex(idx) {
     const letters = THE_ALPHABET.split(",");
 
     if(idx < 0) {
@@ -916,6 +916,23 @@ function getColumnNameForIndex(idx) {
     }
 
     return letters[idx];
+}
+
+export function getIndexForColumnName(name) {
+    const letters = THE_ALPHABET.split(",");
+
+    if(name.length == 1) {
+        return letters.indexOf(name);
+    }
+
+    if(name.length == 2) {
+        const firstLetter = letters.indexOf(name[0]) + 1;
+        const secondLetter = letters.indexOf(name[1]);
+
+        return (firstLetter * 26) + secondLetter;
+    }
+
+    return -1;
 }
 
 function renderScrollbars(grid, showingRows, showingCols, firstShowRow, firstShowCol) {
