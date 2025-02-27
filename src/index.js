@@ -102,11 +102,11 @@ export class ApeGrid {
         setupInstanceListeners(instance);
 
         new ResizeObserver(function() {
-            instance.#pingForResize();
+            instance.pingForResize();
         }).observe(instance.holder);
 
         new MutationObserver(function() {
-            instance.#checkIfAttached();
+            instance.checkIfAttached();
         }).observe(instance.holder, { attributes: true, childList: true, subtree: true });
 
         globalInstances[instance.id] = instance;
@@ -198,7 +198,7 @@ export class ApeGrid {
         }
     }
 
-    #pingForResize() {
+    pingForResize() {
         const instance = this;
 
         if(instance.resizePing) {
@@ -208,7 +208,7 @@ export class ApeGrid {
         instance.resizePing = setTimeout(instance.resize, 40);
     }
 
-    #clearResizePing() {
+    clearResizePing() {
         const instance = this;
 
         if(instance.resizePing) {
@@ -219,7 +219,7 @@ export class ApeGrid {
     }
 
     resize() {
-        this.#clearResizePing();
+        this.clearResizePing();
 
         if(!this.holder || !this.canvas || !this.attached) {
             return;
@@ -244,7 +244,7 @@ export class ApeGrid {
         }
 
         if(!this.attached) {
-            this.#clearResizePing();
+            this.clearResizePing();
 
             this.canvas.remove();
             this.canvas = null;
