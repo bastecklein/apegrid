@@ -649,7 +649,7 @@ function renderGrid(grid) {
             grid.context.stroke();
         }
             
-        curColX += thisColWidth;
+        
 
         let curRowY = 0;
 
@@ -714,7 +714,7 @@ function renderGrid(grid) {
             firstRow = false;
         }
 
-            
+        curColX += thisColWidth;
     }
 
     for(const cell of cellsNeeded) {
